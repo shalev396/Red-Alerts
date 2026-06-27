@@ -1,5 +1,5 @@
 import { useEffect, useRef } from 'react';
-import maplibregl from 'maplibre-gl';
+import { maplibregl } from '@/lib/map/maplibre';
 import { useTheme } from 'next-themes';
 import type { LngLat, PreviewCity } from '@/types/alerts';
 import type { GeoPreviewMapProps } from '@/types/ui';

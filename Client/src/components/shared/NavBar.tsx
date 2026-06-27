@@ -23,7 +23,9 @@ export function NavBar() {
   ];
 
   return (
-    <header className="z-30 flex h-14 shrink-0 items-center justify-between gap-2 border-b bg-background/80 px-3 backdrop-blur-md sm:px-4">
+    // In the Home Screen web app the page draws under the status bar: the top
+    // inset extends the bar behind it (0 everywhere else).
+    <header className="z-30 flex h-[calc(3.5rem+env(safe-area-inset-top))] shrink-0 items-center justify-between gap-2 border-b bg-background/80 px-3 pt-[env(safe-area-inset-top)] backdrop-blur-md sm:px-4">
       <div className="flex min-w-0 items-center gap-2 sm:gap-6">
         <NavLink to={pathTo(ROUTES.HOME, language)} className="flex min-w-0 shrink items-center gap-1.5 sm:gap-2">
           <span className="flex size-8 shrink-0 items-center justify-center rounded-md bg-primary/10 text-primary">

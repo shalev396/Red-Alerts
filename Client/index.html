@@ -3,8 +3,17 @@
   <head>
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/alert.svg" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="theme-color" content="#dc2626" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+
+    <!-- Home Screen web app (iOS "Add to Home Screen", Android install);
+         keep name/colors in sync with public/manifest.webmanifest -->
+    <link rel="manifest" href="/manifest.webmanifest" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <meta name="apple-mobile-web-app-title" content="Red Alerts" />
+    <!-- Page draws under the status bar; layout pads with env(safe-area-inset-*) -->
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <!-- --background of the default (dark) theme; ThemeProvider syncs it on theme change -->
+    <meta name="theme-color" content="#0a0a0a" />
     <title>Red Alerts | התרעות בזמן אמת</title>
     <meta
       name="description"

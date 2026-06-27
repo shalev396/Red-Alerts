@@ -176,11 +176,17 @@ export default function HomePage() {
     ...feedCopy,
   };
 
-  const overlayBottom = `${bottomInsetPx}px`;
+  // Overlay offsets from the bottom edge. With the timeline closed they sit on
+  // the safe area (above the iOS home indicator in the Home Screen web app; the
+  // inset is 0 elsewhere); with it open they are measured from the panel, whose
+  // height already includes that inset.
+  const fromBottom = (px: number) =>
+    timelineOpen ? `${px}px` : `calc(${px}px + env(safe-area-inset-bottom))`;
+  const overlayBottom = fromBottom(bottomInsetPx);
   // Nudge the basemap picker up when a city/event is selected so the
   // MapLibre popup near the bottom of the map isn't hidden behind it.
   const basemapBottom = selectedEventId
-    ? `${bottomInsetPx + SELECTED_POPUP_CLEARANCE_PX}px`
+    ? fromBottom(bottomInsetPx + SELECTED_POPUP_CLEARANCE_PX)
     : overlayBottom;
   // Mobile bottom control row, and the MapLibre attribution one row above it
   // (consumed by the mobile attribution rule in index.css).
@@ -189,7 +195,7 @@ export default function HomePage() {
     : selectedEventId
       ? SELECTED_POPUP_CLEARANCE_PX
       : BASE_INSET_PX;
-  const attribBottom = `${mobileClusterBottomPx + CONTROL_ROW_PX}px`;
+  const attribBottom = fromBottom(mobileClusterBottomPx + CONTROL_ROW_PX);
 
   return (
     <div
@@ -224,7 +230,7 @@ export default function HomePage() {
           replaced by the panel and the remaining controls float just above it. */}
       <div
         className="pointer-events-none absolute inset-x-0 z-20 flex items-end justify-between px-3 md:hidden transition-[bottom] duration-200"
-        style={{ bottom: `${mobileClusterBottomPx}px` }}
+        style={{ bottom: fromBottom(mobileClusterBottomPx) }}
       >
         <div className="flex flex-col items-start gap-2">
           <BasemapSwitcher />
@@ -258,7 +264,10 @@ export default function HomePage() {
               {t('home.activeNow', { count: activeEvents.length })}
             </Button>
           </SheetTrigger>
-          <SheetContent side="bottom" className="h-[min(80svh,40rem)] p-0">
+          <SheetContent
+            side="bottom"
+            className="h-[min(80svh,40rem)] p-0 pb-[env(safe-area-inset-bottom)]"
+          >
             <SheetHeader className="sr-only">
               <SheetTitle>{feedCopy.feedTitle}</SheetTitle>
             </SheetHeader>

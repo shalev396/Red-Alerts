@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useRef } from 'react';
-import maplibregl from 'maplibre-gl';
+import { maplibregl } from '@/lib/map/maplibre';
 import { useTheme } from 'next-themes';
 import { useTranslation } from 'react-i18next';
 import i18n from '@/i18n';

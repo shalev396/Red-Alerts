@@ -2,7 +2,7 @@
 requests==2.34.2
 pymysql==1.1.1
 # Required by PyMySQL for MySQL 8 / RDS "caching_sha2_password" auth.
-cryptography==48.0.0
+cryptography==50.0.2
 # ORM. Alembic is used in-memory by sync_database() (diff models -> DB); the
 # worker never syncs on boot - schema sync is triggered by hand via `make sync`.
 SQLAlchemy==2.0.36

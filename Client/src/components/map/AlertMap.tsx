@@ -1,5 +1,6 @@
 import { useEffect, useRef, useCallback } from 'react';
-import maplibregl, { type FilterSpecification } from 'maplibre-gl';
+import { maplibregl } from '@/lib/map/maplibre';
+import type { FilterSpecification } from 'maplibre-gl';
 import { useTheme } from 'next-themes';
 import { useTranslation } from 'react-i18next';
 import { CONFIG } from '@/data/config';

@@ -1,7 +1,8 @@
-import maplibregl, {
-  type ExpressionSpecification,
-  type LayerSpecification,
-  type SourceSpecification,
+import { maplibregl } from '@/lib/map/maplibre';
+import type {
+  ExpressionSpecification,
+  LayerSpecification,
+  SourceSpecification,
 } from 'maplibre-gl';
 
 /**

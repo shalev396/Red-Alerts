@@ -1,16 +1,16 @@
 # Dependencies bundled into the manually-uploaded Lambda "common-layer".
 # boto3 is intentionally NOT listed - it is already present in the Lambda runtime.
-fastapi==0.111.0
+fastapi==0.142.2
 mangum==0.17.0
 pymysql==1.1.1
 # Required by PyMySQL for MySQL 8 / RDS "caching_sha2_password" auth.
-cryptography==48.0.0
+cryptography==50.0.2
 # ORM.
 SQLAlchemy==2.0.36
 # Used IN-MEMORY only (no migration files): its autogenerate engine powers
 # sync_database() to diff models -> DB and apply changes. `make sync`.
 alembic==1.13.2
 requests==2.34.2
-pydantic==2.7.1
+pydantic==2.13.5
 # IANA tz database for zoneinfo (required on Windows; harmless on Linux/Lambda).
 tzdata>=2024.1

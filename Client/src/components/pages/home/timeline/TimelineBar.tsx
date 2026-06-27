@@ -48,7 +48,7 @@ export function TimelineBar({ dayEvents }: TimelineBarProps) {
 
   if (!isOpen) {
     return (
-      <div className="pointer-events-none absolute inset-x-0 bottom-4 z-30 hidden justify-center md:flex">
+      <div className="pointer-events-none absolute inset-x-0 bottom-[calc(1rem+env(safe-area-inset-bottom))] z-30 hidden justify-center md:flex">
         <Button
           type="button"
           variant="outline"
@@ -68,7 +68,9 @@ export function TimelineBar({ dayEvents }: TimelineBarProps) {
     <div
       ref={panelRef}
       className={cn(
-        'absolute inset-x-0 bottom-0 z-30 border-t bg-background/95 shadow-lg backdrop-blur-md',
+        // pb: the panel reaches the bottom edge, its content stays above the
+        // home indicator. The measured height includes it (see HomePage).
+        'absolute inset-x-0 bottom-0 z-30 border-t bg-background/95 pb-[env(safe-area-inset-bottom)] shadow-lg backdrop-blur-md',
         'max-h-[50svh] md:max-h-none',
       )}
     >
