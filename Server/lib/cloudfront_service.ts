@@ -16,6 +16,8 @@ export interface CloudfrontServiceProps {
   readonly certificate: acm.ICertificate;
   /** Custom domain served by this distribution. */
   readonly domain: string;
+  /* Optional: ARN of an existing CloudFront-scope (us-east-1) WAF web ACL to   */
+  readonly webAclArn?: string;
 }
 
 export class CloudfrontService extends Construct {
@@ -82,6 +84,7 @@ export class CloudfrontService extends Construct {
       certificate: props.certificate,
       domainNames: [props.domain],
       minimumProtocolVersion: cloudfront.SecurityPolicyProtocol.TLS_V1_2_2021,
+      webAclId: props.webAclArn,
       // Default behavior -> everything WITHOUT an /api prefix goes to the S3
       // client website (which handles SPA deep-link fallback itself).
       defaultBehavior: {

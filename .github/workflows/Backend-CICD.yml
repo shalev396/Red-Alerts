@@ -32,6 +32,7 @@ jobs:
       VPC_ID: ${{ secrets.VPC_ID }}
       SUBNET_IDS: ${{ secrets.SUBNET_IDS }}
       DB_SECURITY_GROUP_ID: ${{ secrets.DB_SECURITY_GROUP_ID }}
+      WAF_WEB_ACL_ARN: ${{ secrets.WAF_WEB_ACL_ARN }}
       HOSTED_ZONE: ${{ vars.HOSTED_ZONE }}
       # Environment-scoped variable / secret (differ per environment).
       APP_DOMAIN: ${{ vars.APP_DOMAIN }}

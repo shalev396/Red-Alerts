@@ -20,7 +20,8 @@ const app = new cdk.App();
       -c dbSecurityGroupId=sg-0123456789abcdef0 \
       -c domain=red-alerts.example.com \
       -c hostedZone=example.com \
-      -c imageTag=ab12cd3
+      -c imageTag=ab12cd3 \
+      -c webAclArn=arn:aws:wafv2:us-east-1:123456789012:global/webacl/name/id
 */
 // Target environment (dev/qa/prod). Drives the per-environment stack name so
 // each environment is an INDEPENDENT CloudFormation stack. `make deploy <env>`
@@ -73,6 +74,11 @@ const hostedZone: string | undefined =
 const imageTag: string =
   app.node.tryGetContext("imageTag") || "latest";
 
+// Optional: ARN of the shared CloudFront-scope WAF web ACL (shalev396-shared-acl,
+// us-east-1) to attach to the distribution. Empty (unset WAF_WEB_ACL_ARN) -> no WAF.
+const webAclArn: string | undefined =
+  String(app.node.tryGetContext("webAclArn") ?? "").trim() || undefined;
+
 if (!environment) {
   throw new Error(
     "Missing env. Pass -c env=dev|qa|prod (the Makefile passes this from `make deploy <env>`)."
@@ -117,4 +123,5 @@ new RedAlertsStack(app, CONSTANTS.stackName(environment), {
   domain,
   hostedZoneName: hostedZone,
   imageTag,
+  webAclArn,
 });

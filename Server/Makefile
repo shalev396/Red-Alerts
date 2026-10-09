@@ -22,7 +22,8 @@
 #
 # Per-environment config lives in gitignored .env.<env> files, each holding both
 # DATABASE_URL_CLOUD (deployed/cloud DB) and DATABASE_URL_LOCAL (your local DB),
-# plus the deploy values (AWS_ACCOUNT_ID, CERT_ARN, VPC_ID, ...). In CI those
+# plus the deploy values (AWS_ACCOUNT_ID, CERT_ARN, VPC_ID, WAF_WEB_ACL_ARN, ...).
+# WAF_WEB_ACL_ARN is optional (empty -> no WAF on CloudFront). In CI those
 # come from GitHub secrets/vars (the same names) instead of a file. Python deps
 # install into a project-local .venv, NEVER your global Python. AWS credentials
 # come from your ambient AWS CLI session (aws sso login) / OIDC - not here.
@@ -122,7 +123,8 @@ CDK_CONTEXT := \
   -c dbSecurityGroupId="$(DB_SECURITY_GROUP_ID)" \
   -c domain="$(APP_DOMAIN)" \
   -c hostedZone="$(HOSTED_ZONE)" \
-  -c imageTag="$(IMAGE_TAG)"
+  -c imageTag="$(IMAGE_TAG)" \
+  -c webAclArn="$(WAF_WEB_ACL_ARN)"
 
 # Project-local virtual environment. PYTHON creates it (your global python);
 # VENV_PY is the interpreter INSIDE it. Bin dir differs Windows vs POSIX.

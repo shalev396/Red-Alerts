@@ -244,7 +244,7 @@ when they change:
    ```
    The CDK stack pins the worker to the just-pushed image tag, so deploying rolls
    ECS forward to the new build. Account-specific secrets (DB URL, cert ARN, VPC,
-   domain) are passed as CDK context at deploy time, never committed
+   domain, optional `WAF_WEB_ACL_ARN`) are passed as CDK context at deploy time, never committed
    (`bin/red-alerts.ts`, `constants.ts`).
 
 3. **Database schema (manual, when models changed):**

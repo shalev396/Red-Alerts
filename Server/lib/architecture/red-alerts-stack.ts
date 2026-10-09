@@ -35,6 +35,8 @@ export interface RedAlertsStackProps extends cdk.StackProps {
   readonly hostedZoneName: string;
   /** Worker image tag (in the ECR repo) to run - pushed by `make push-docker`. */
   readonly imageTag: string;
+  /** Optional: shared WAF web ACL ARN (CloudFront scope) attached to the distribution. */
+  readonly webAclArn?: string;
 }
 
 export class RedAlertsStack extends cdk.Stack {
@@ -136,6 +138,7 @@ export class RedAlertsStack extends cdk.Stack {
       apiOriginDomain: apiGatewayService.apiOriginDomain,
       certificate: acmService.certificate,
       domain: props.domain,
+      webAclArn: props.webAclArn,
     });
     resourceInfo.distribution = cloudfrontService.distribution;
 
